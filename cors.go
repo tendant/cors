@@ -280,6 +280,9 @@ func (c *Cors) handlePreflight(w http.ResponseWriter, r *http.Request) {
 	}
 	if c.allowCredentials {
 		headers.Set("Access-Control-Allow-Credentials", "true")
+		c.logf("Preflight: Set Access-Control-Allow-Credentials: true")
+	} else {
+		c.logf("Preflight: allowCredentials is false, NOT setting credentials header")
 	}
 	if c.maxAge > 0 {
 		headers.Set("Access-Control-Max-Age", strconv.Itoa(c.maxAge))
